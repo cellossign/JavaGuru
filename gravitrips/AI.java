@@ -13,7 +13,6 @@ public class AI extends Player {
     public int move() {
         Random r = new Random();
         int chosenColumn = r.nextInt(5)+1;
-        System.out.println();
 
         System.out.println("AI: "+chosenColumn+". column");
         return chosenColumn;

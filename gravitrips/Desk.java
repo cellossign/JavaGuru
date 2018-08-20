@@ -30,7 +30,7 @@ public class Desk {
                 }
             }
         }
-        System.out.println("podrjad: " + count);
+        //System.out.println("podrjad: " + count);
         if (count >= 4) {
             won = true;
         }
@@ -51,7 +51,7 @@ public class Desk {
                 }
             }
         }
-        System.out.println("podrjad columns: " + count);
+       // System.out.println("podrjad columns: " + count);
         if (count >= 4) {
             won = true;
         }

@@ -11,14 +11,12 @@ public class Game {
         Player player2 = new Human(FieldValue.X);
         Player currentPlayer;
 
-        //1
-
         currentPlayer = player1;
         currentPlayer.chip = ((AI) player1).chip;
 
         for (int i = 0; i < 9; i++) {
             int chosenColumnPlayer1 = currentPlayer.move();
-            desk.changeDesk(chosenColumnPlayer1, currentPlayer.chip); // Допустим, игрок походил в 3 столбец крестиком
+            desk.changeDesk(chosenColumnPlayer1, currentPlayer.chip);
             desk.showDesk(desk);
 
             boolean finish = desk.checkWinner();
@@ -31,7 +29,7 @@ public class Game {
             if (finish == true) {
                 System.out.println("O win");
             } else {
-                System.out.println("O did not win");
+                //System.out.println("O did not win");
             }
             if (currentPlayer == player1) {
                 currentPlayer = player2;
