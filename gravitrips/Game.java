@@ -11,6 +11,8 @@ public class Game {
         Player player2 = new Human(FieldValue.X);
         Player currentPlayer;
 
+
+
         currentPlayer = player1;
         currentPlayer.chip = ((AI) player1).chip;
 
