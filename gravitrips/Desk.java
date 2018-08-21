@@ -18,6 +18,7 @@ public class Desk {
 
     public boolean checkWinner() {
         int count = 1;
+        int score=0;
         boolean won = false;
 
         for (int i = 0; i < 6; i++) {
@@ -29,9 +30,14 @@ public class Desk {
                         ) {
                     count++;
                     System.out.println("the same in " + (i + 1) + " row: " + count);
-                }//else {count=1;}
+                    if (count > 3) {
+                        score = count;
+                    }
+                } else {
+                    count = 1;
+                }
             }
-            if (count > 3) {
+            if (score > 3) {
                 won = true;
                 break;
             }
@@ -41,6 +47,7 @@ public class Desk {
 
     public boolean checkWinnerByColumns() {
         int count = 1;
+        int score=0;
         boolean won = false;
         for (int j = 0; j < 6; j++) {
             count = 1;
@@ -51,18 +58,20 @@ public class Desk {
                         ) {
                     count++;
                     System.out.println("The same in " + (j + 1) + " column: " + count);
+                    if (count > 3) {
+                        score = count;
+                    }
                 } else {
                     count = 1;
                 }
             }
-            if (count > 3) {
+            if (score > 3) {
                 won = true;
                 break;
             }
         }
         return won;
     }
-
 
     public FieldValue[][] changeDesk(int column, FieldValue chip) {
         for (int i = (columns - 1); i >= 0; i--) {
@@ -99,5 +108,36 @@ public class Desk {
             System.out.println();
         }
         System.out.println();
+    }
+
+
+    public boolean checkWinnerByDiagonal() {
+        boolean won = false;
+
+        for (int i = 5; i > 2; i--) {
+            for (int j = 0; j < 3; j++) {
+                if (((fields[i][j] == fields[i - 1][j + 1]) &&
+                        (fields[i][j] == fields[i - 2][j + 2]) &&
+                        (fields[i][j] == fields[i - 3][j + 3]))
+                        &&
+                        ((fields[i][j] == FieldValue.O) || (fields[i][j] == FieldValue.X))
+                        ) {
+                    System.out.println("the same are in diagonal [" + (i - 2) + "][" + (j + 4) + "]");
+                    won = true;
+                }//else {count=1;}
+            }
+            for (int j = 3; j < 6; j++) {
+                if (((fields[i][j] == fields[i - 1][j - 1]) &&
+                        (fields[i][j] == fields[i - 2][j - 2]) &&
+                        (fields[i][j] == fields[i - 3][j - 3]))
+                        &&
+                        ((fields[i][j] == FieldValue.O) || (fields[i][j] == FieldValue.X))
+                        ) {
+                    System.out.println("the same are in diagonal [" + (i - 2) + "][" + (j - 3) + "]");
+                    won = true;
+                }
+            }
+        }
+        return won;
     }
 }

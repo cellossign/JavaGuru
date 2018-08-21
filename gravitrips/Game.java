@@ -18,6 +18,7 @@ public class Game {
         boolean winColumns = false;
         boolean isFull = false;
         boolean finish = false;
+        boolean winDiagonal=false;
 
 
         int countChances = 1;
@@ -32,9 +33,10 @@ public class Game {
 
                 winRows = desk.checkWinner();
                 winColumns = desk.checkWinnerByColumns();
+                winDiagonal=desk.checkWinnerByDiagonal();
 
                 System.out.println();
-                if ((winColumns) || (winRows)) {
+                if ((winColumns) || (winRows)||(winDiagonal)) {
                     finish = true;
                     System.out.println("Game over. " + currentPlayer.chip + " wins");
                     break;
