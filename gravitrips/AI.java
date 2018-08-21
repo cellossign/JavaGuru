@@ -12,9 +12,10 @@ public class AI extends Player {
     @Override
     public int move() {
         Random r = new Random();
-        int chosenColumn = r.nextInt(5)+1;
+        int random;
+        int chosenColumn = r.nextInt(6);
 
-        System.out.println("AI: "+chosenColumn+". column");
-        return chosenColumn;
+        System.out.println("AI: " + (chosenColumn + 1) + ". column");
+        return (chosenColumn + 1);
     }
 }

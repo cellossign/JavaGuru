@@ -11,194 +11,59 @@ public class Game {
         Player player2 = new Human(FieldValue.X);
         Player currentPlayer;
 
-
-
         currentPlayer = player1;
         currentPlayer.chip = ((AI) player1).chip;
 
-        for (int i = 0; i < 9; i++) {
+        boolean winRows = false;
+        boolean winColumns = false;
+        boolean isFull = false;
+        boolean finish = false;
+
+
+        int countChances = 1;
+        while (finish == false) {
+
             int chosenColumnPlayer1 = currentPlayer.move();
-            desk.changeDesk(chosenColumnPlayer1, currentPlayer.chip);
-            desk.showDesk(desk);
 
-            boolean finish = desk.checkWinner();
-            boolean finishX = desk.checkWinnerByColumns();
-            System.out.println();
-            if (finishX == true) {
-                System.out.println("X win");
-            }
+            if (desk.fields[0][chosenColumnPlayer1 - 1] == FieldValue._) {
+                countChances = 1;
+                desk.changeDesk(chosenColumnPlayer1, currentPlayer.chip);
+                desk.showDesk(desk);
 
-            if (finish == true) {
-                System.out.println("O win");
+                winRows = desk.checkWinner();
+                winColumns = desk.checkWinnerByColumns();
+
+                System.out.println();
+                if ((winColumns) || (winRows)) {
+                    finish = true;
+                    System.out.println("Game over. " + currentPlayer.chip + " wins");
+                    break;
+                }
+
+                isFull = desk.checkIfIsFull(desk);
+                if (isFull) {
+                    finish = true;
+                    System.out.println("Game over. Nobody wins");
+                    break;
+                }
+
+                if (currentPlayer == player1) {
+                    currentPlayer = player2;
+                    currentPlayer.chip = ((Human) player2).chip;
+                } else {
+                    currentPlayer = player1;
+                    currentPlayer.chip = player1.chip;
+                }
             } else {
-                //System.out.println("O did not win");
+                System.out.println("This column is full. Please, choose an other column");
+                countChances++;
             }
-            if (currentPlayer == player1) {
-                currentPlayer = player2;
-                currentPlayer.chip = ((Human) player2).chip;
-            } else {
-                currentPlayer = player1;
-                currentPlayer.chip = player1.chip;
+            if (countChances > 7) {
+                System.out.println("Oh, it's enough!..");
+                finish = true;
+                break;
             }
-
         }
-
-
-////2
-//        int chosenColumnPlayer2 = player2.move();
-//        desk.changeDesk(chosenColumnPlayer2, ((AI) player2).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//
-////3
-//        chosenColumnPlayer1 = player1.move();
-//        desk.changeDesk(chosenColumnPlayer1, ((AI) player1).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//
-//        //4
-//        chosenColumnPlayer2 = player2.move();
-//        desk.changeDesk(chosenColumnPlayer2, ((AI) player2).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//
-//        //5
-//        chosenColumnPlayer1 = player1.move();
-//        desk.changeDesk(chosenColumnPlayer1, ((AI) player1).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//        //6
-//        chosenColumnPlayer2 = player2.move();
-//        desk.changeDesk(chosenColumnPlayer2, ((AI) player2).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//
-//        //7
-//        chosenColumnPlayer1 = player1.move();
-//        desk.changeDesk(chosenColumnPlayer1, ((AI) player1).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//
-////8
-//        chosenColumnPlayer2 = player2.move();
-//        desk.changeDesk(chosenColumnPlayer2, ((AI) player2).chip);
-//        desk.showDesk(desk);
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//
-//
-////9
-//        chosenColumnPlayer1 = player1.move();
-//        desk.changeDesk(chosenColumnPlayer1, ((AI) player1).chip);
-//        desk.showDesk(desk);
-//
-//
-//        finish = desk.checkWinner();
-//        finishX = desk.checkWinnerByColumns();
-//        System.out.println();
-//        if (finishX == true) {
-//            System.out.println("X win");
-//        }
-//
-//        if (finish == true) {
-//            System.out.println("O win");
-//        } else {
-//            System.out.println("O did not win");
-//        }
-//        cycle {
-//            player move
-//            check( if true break) else
-//            change player (human - ai)
-//        }
     }
 
     public static int check() {

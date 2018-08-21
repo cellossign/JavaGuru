@@ -19,6 +19,7 @@ public class Desk {
     public boolean checkWinner() {
         int count = 1;
         boolean won = false;
+
         for (int i = 0; i < 6; i++) {
             count = 1;
             for (int j = 0; j < 5; j++) {
@@ -27,12 +28,13 @@ public class Desk {
                         ((fields[i][j] == FieldValue.O) || (fields[i][j] == FieldValue.X))
                         ) {
                     count++;
-                }
+                    System.out.println("the same in " + (i + 1) + " row: " + count);
+                }//else {count=1;}
             }
-        }
-        //System.out.println("podrjad: " + count);
-        if (count >= 4) {
-            won = true;
+            if (count > 3) {
+                won = true;
+                break;
+            }
         }
         return won;
     }
@@ -40,27 +42,29 @@ public class Desk {
     public boolean checkWinnerByColumns() {
         int count = 1;
         boolean won = false;
-        for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 6; j++) {
             count = 1;
-            for (int j = 0; j < 5; j++) {
-                if ((fields[j][i] == fields[j][i + 1])
+            for (int i = 0; i < 5; i++) {
+                if ((fields[i][j] == fields[i + 1][j])
                         &&
-                        ((fields[j][i] == FieldValue.O) || (fields[j][i] == FieldValue.X))
+                        ((fields[i][j] == FieldValue.O) || (fields[i][j] == FieldValue.X))
                         ) {
                     count++;
+                    System.out.println("The same in " + (j + 1) + " column: " + count);
+                } else {
+                    count = 1;
                 }
             }
-        }
-       // System.out.println("podrjad columns: " + count);
-        if (count >= 4) {
-            won = true;
+            if (count > 3) {
+                won = true;
+                break;
+            }
         }
         return won;
     }
 
 
     public FieldValue[][] changeDesk(int column, FieldValue chip) {
-
         for (int i = (columns - 1); i >= 0; i--) {
             //continue;
             if (fields[i][column - 1] == FieldValue._) {
@@ -73,16 +77,27 @@ public class Desk {
         return fields;
     }
 
-
-    public static void showDesk(Desk desk) {
-        //просто распечатка результата
+    public static boolean checkIfIsFull(Desk desk) {
+        boolean isFull = true;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                System.out.print(desk.fields[i][j]);
+                if (desk.fields[i][j] == FieldValue._) {
+                    isFull = false;
+                    break;
+                }
+                ;
+            }
+        }
+        return isFull;
+    }
+
+    public static void showDesk(Desk desk) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                System.out.print(desk.fields[i][j] + " ");
             }
             System.out.println();
         }
         System.out.println();
     }
-
 }

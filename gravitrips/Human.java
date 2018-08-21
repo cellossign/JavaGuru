@@ -16,7 +16,7 @@ public class Human extends Player {
         int chosenColumn = sc.nextInt();
         System.out.println("Human: " + chosenColumn + " .column");
         //System.out.println();
-        sc.close();
+        //sc.close();
         return chosenColumn;
     }
 }
