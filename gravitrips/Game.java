@@ -7,12 +7,12 @@ public class Game {
 
         Desk desk = new Desk(rows, columns);
 
-        Player player1 = new AI(FieldValue.O);
+        Player player1 = new Human(FieldValue.O);
         Player player2 = new Human(FieldValue.X);
         Player currentPlayer;
 
         currentPlayer = player1;
-        currentPlayer.chip = ((AI) player1).chip;
+        currentPlayer.chip = ((Human) player1).chip;
 
         boolean winRows = false;
         boolean winColumns = false;
@@ -22,7 +22,7 @@ public class Game {
 
 
         int countChances = 1;
-        while (finish == false) {
+        while (!finish) {
 
             int chosenColumnPlayer1 = currentPlayer.move();
 
