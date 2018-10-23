@@ -8,7 +8,7 @@ public class Game {
         Desk desk = new Desk(rows, columns);
 
         Player player1 = new Human(FieldValue.O);
-        Player player2 = new Human(FieldValue.X);
+        Player player2 = new AI(FieldValue.X);
         Player currentPlayer;
 
         currentPlayer = player1;
@@ -18,7 +18,7 @@ public class Game {
         boolean winColumns = false;
         boolean isFull = false;
         boolean finish = false;
-        boolean winDiagonal=false;
+        boolean winDiagonal = false;
 
 
         int countChances = 1;
@@ -33,10 +33,10 @@ public class Game {
 
                 winRows = desk.checkWinner();
                 winColumns = desk.checkWinnerByColumns();
-                winDiagonal=desk.checkWinnerByDiagonal();
+                winDiagonal = desk.checkWinnerByDiagonal();
 
                 System.out.println();
-                if ((winColumns) || (winRows)||(winDiagonal)) {
+                if ((winColumns) || (winRows) || (winDiagonal)) {
                     finish = true;
                     System.out.println("Game over. " + currentPlayer.chip + " wins");
                     break;
@@ -51,7 +51,7 @@ public class Game {
 
                 if (currentPlayer == player1) {
                     currentPlayer = player2;
-                    currentPlayer.chip = ((Human) player2).chip;
+                    currentPlayer.chip = ((AI) player2).chip;
                 } else {
                     currentPlayer = player1;
                     currentPlayer.chip = player1.chip;
@@ -67,9 +67,4 @@ public class Game {
             }
         }
     }
-
-    public static int check() {
-        return 0;
-    }
-
 }
